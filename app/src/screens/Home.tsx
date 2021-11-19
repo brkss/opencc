@@ -21,14 +21,13 @@ export const Home: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#fff8e8",
   },
   timer: {
-    flex: 3,
-    backgroundColor: "#fff8e8",
+    flex: 4,
   },
   info: {
     flex: 3,
-    backgroundColor: "#faeccd",
   },
   buttonContainer: {
     flex: 1,

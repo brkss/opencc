@@ -5,7 +5,7 @@ export const Timer: React.FC = () => {
   return (
     <View style={styles.container}>
       <View style={styles.circle}>
-        <Text style={styles.time}>20:00</Text>
+        <Text style={styles.time}>02:32</Text>
         <Text style={styles.info}>Fast-Acting insulin</Text>
       </View>
     </View>
@@ -23,6 +23,8 @@ const styles = StyleSheet.create({
     width: 300,
     backgroundColor: "#CAD4FF",
     borderRadius: 1000,
+    borderColor: "#B2C0FF",
+    borderWidth: 10,
     justifyContent: "center",
     alignItems: "center",
   },
