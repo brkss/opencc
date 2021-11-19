@@ -1,17 +1,18 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { Button, Timer } from "../components";
 
 export const Home: React.FC = () => {
   return (
     <View style={styles.container}>
       <View style={styles.timer}>
-        <Text>Time Here !</Text>
+        <Timer />
       </View>
       <View style={styles.info}>
         <Text>Other component!</Text>
       </View>
       <View style={styles.buttonContainer}>
-        <Text>Add Button !</Text>
+        <Button />
       </View>
     </View>
   );
@@ -31,6 +32,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
-    backgroundColor: "#ffe9b8",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
