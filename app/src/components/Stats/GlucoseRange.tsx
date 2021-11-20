@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
+    marginTop: 40,
   },
   bar: {
     width: "95%",
@@ -36,13 +37,13 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
     width: "20%",
-    backgroundColor: "#ffc37a",
+    backgroundColor: "#F6BC00",
     justifyContent: "center",
     alignItems: "center",
   },
   inRange: {
     width: "70%",
-    backgroundColor: "#7bcc4b",
+    backgroundColor: "#72CC50",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
     width: "10%",
-    backgroundColor: "#ff8080",
+    backgroundColor: "#FB6A75",
     justifyContent: "center",
     alignItems: "center",
   },

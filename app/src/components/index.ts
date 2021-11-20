@@ -1,3 +1,3 @@
 export { Button } from "./general";
-export { Timer } from "./Timer";
+export { Timer, BgInsulinTimer } from "./Timer";
 export { GlucoseRange } from "./Stats";
