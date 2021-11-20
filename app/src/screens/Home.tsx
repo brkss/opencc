@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { Button, Timer } from "../components";
+import { Button, Timer, GlucoseRange } from "../components";
 
 export const Home: React.FC = () => {
   return (
@@ -9,6 +9,7 @@ export const Home: React.FC = () => {
         <Timer />
       </View>
       <View style={styles.info}>
+        <GlucoseRange />
         <Text>Other component!</Text>
       </View>
       <View style={styles.buttonContainer}>
