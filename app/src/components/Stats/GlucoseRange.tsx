@@ -6,6 +6,7 @@ const { width } = Dimensions.get("window");
 export const GlucoseRange: React.FC = () => {
   return (
     <View style={styles.container}>
+      <Text style={styles.label}>70% in Range</Text>
       <View style={styles.bar}>
         <View style={styles.upRange}>
           <Text style={styles.num}>20%</Text>
@@ -26,6 +27,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 40,
+  },
+  label: {
+    fontSize: 15,
+    fontWeight: "bold",
+    textAlign: "left",
+    alignSelf: "flex-start",
+    marginBottom: 5,
+    marginLeft: 10,
   },
   bar: {
     width: "95%",
@@ -57,5 +66,6 @@ const styles = StyleSheet.create({
   },
   num: {
     fontSize: 10,
+    fontWeight: "bold",
   },
 });

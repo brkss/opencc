@@ -1,14 +1,15 @@
 import React from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet, ScrollView, Text } from "react-native";
 import { Record } from ".";
 import { data } from "../../utils/data/records.data";
 
 export const RecordsHistory: React.FC = () => {
   return (
     <View style={styles.container}>
+      <Text style={styles.label}>Last Records</Text>
       <ScrollView
         horizontal={true}
-        style={{ marginTop: 15 }}
+        style={{ marginTop: 5 }}
         showsHorizontalScrollIndicator={false}
       >
         {data.map((record, key) => (
@@ -21,7 +22,12 @@ export const RecordsHistory: React.FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 15,
+    marginTop: 20,
     marginLeft: 12,
+  },
+  label: {
+    fontSize: 15,
+    fontWeight: "bold",
+    textAlign: "left",
   },
 });

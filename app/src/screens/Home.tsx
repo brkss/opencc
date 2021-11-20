@@ -32,14 +32,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffeae7",
   },
   timer: {
-    flex: 4,
+    flex: 3,
+    justifyContent: "center",
   },
   info: {
     flex: 3,
+    justifyContent: "center",
   },
   buttonContainer: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
   },
 });
