@@ -21,21 +21,21 @@ const styles = StyleSheet.create({
   circle: {
     height: 300,
     width: 300,
-    backgroundColor: "#CAD4FF",
+    backgroundColor: "#f9dad0",
     borderRadius: 1000,
-    borderColor: "#B2C0FF",
+    borderColor: "#5761f2",
     borderWidth: 10,
     justifyContent: "center",
     alignItems: "center",
   },
   time: {
     fontSize: 30,
-    color: "black",
+    color: "#5761f2",
     fontWeight: "bold",
   },
   info: {
     fontSize: 15,
     color: "black",
-    fontWeight: "300",
+    fontWeight: "bold",
   },
 });

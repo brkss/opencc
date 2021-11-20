@@ -23,19 +23,20 @@ const styles = StyleSheet.create({
   bar: {
     height: 30,
     width: "95%",
-    backgroundColor: "#596CCE",
+    backgroundColor: "#3f49da",
     borderRadius: 10,
   },
   timeLeft: {
     height: 30,
     width: "77%",
-    backgroundColor: "#A1A7FF",
+    backgroundColor: "#5761f2",
     borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
   },
   time: {
     fontSize: 12,
+    color: "#ffeae7",
     fontWeight: "bold",
   },
   label: {

@@ -1,6 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { Button, Timer, GlucoseRange, BgInsulinTimer } from "../components";
+import {
+  Button,
+  Timer,
+  GlucoseRange,
+  BgInsulinTimer,
+  RecordsHistory,
+} from "../components";
 
 export const Home: React.FC = () => {
   return (
@@ -11,6 +17,7 @@ export const Home: React.FC = () => {
       <View style={styles.info}>
         <BgInsulinTimer />
         <GlucoseRange />
+        <RecordsHistory />
       </View>
       <View style={styles.buttonContainer}>
         <Button />
@@ -22,7 +29,7 @@ export const Home: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff8e8",
+    backgroundColor: "#ffeae7",
   },
   timer: {
     flex: 4,
