@@ -8,7 +8,7 @@ import {
   RecordsHistory,
 } from "../components";
 
-export const Home: React.FC = () => {
+export const Home: React.FC<any> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.timer}>
@@ -20,7 +20,10 @@ export const Home: React.FC = () => {
         <RecordsHistory />
       </View>
       <View style={styles.buttonContainer}>
-        <Button />
+        <Button
+          name={"ADD RECORD"}
+          onClick={() => navigation.navigate("add-record")}
+        />
       </View>
     </View>
   );

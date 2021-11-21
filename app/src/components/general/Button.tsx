@@ -3,10 +3,15 @@ import { TouchableOpacity, Text, StyleSheet, Dimensions } from "react-native";
 
 const { width } = Dimensions.get("window");
 
-export const Button: React.FC = () => {
+interface Props {
+  name: string;
+  onClick: () => void;
+}
+
+export const Button: React.FC<Props> = ({ onClick, name }) => {
   return (
-    <TouchableOpacity style={styles.container}>
-      <Text style={styles.txt}>ADD RECORD</Text>
+    <TouchableOpacity style={styles.container} onPress={() => onClick()}>
+      <Text style={styles.txt}>{name}</Text>
     </TouchableOpacity>
   );
 };

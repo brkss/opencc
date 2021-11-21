@@ -14,6 +14,7 @@ export const Record: React.FC<IRecord> = ({ icon, value }) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#f9dad0",
+    //backgroundColor: "#5761f2",
     padding: 15,
     borderRadius: 100,
     height: 100,
