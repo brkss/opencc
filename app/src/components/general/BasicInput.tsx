@@ -1,11 +1,24 @@
 import React from "react";
-import { View, StyleSheet, SafeAreaView, TextInput } from "react-native";
+import {
+  View,
+  StyleSheet,
+  SafeAreaView,
+  TextInput,
+  Dimensions,
+} from "react-native";
 
-export const BasicInput: React.FC = () => {
-  const [text, onChangeText] = React.useState("Useless Text");
+const { width } = Dimensions.get("screen");
+
+interface Props {
+  placeholder: string;
+}
+
+export const BasicInput: React.FC<Props> = ({ placeholder }) => {
+  const [text, onChangeText] = React.useState<string>();
   return (
     <SafeAreaView style={styles.container}>
       <TextInput
+        placeholder={placeholder}
         style={styles.input}
         onChangeText={onChangeText}
         value={text}
@@ -15,6 +28,15 @@ export const BasicInput: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
-  input: {},
+  container: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 10,
+  },
+  input: {
+    width: width * 0.9,
+    padding: 15,
+    backgroundColor: "#edf0ee",
+    borderRadius: 10,
+  },
 });

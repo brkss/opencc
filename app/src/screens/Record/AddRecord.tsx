@@ -6,9 +6,12 @@ export const AddRecord: React.FC = () => {
   return (
     <View style={styles.container}>
       <View style={styles.wraper}>
-        <RecordType />
-        <View>
-          <BasicInput />
+        <View style={styles.recordContainer}>
+          <RecordType />
+        </View>
+        <View style={styles.inputContainer}>
+          <BasicInput placeholder={"Glucose"} />
+          <BasicInput placeholder={"Units"} />
         </View>
         <View style={styles.buttonContainer}>
           <Button name={"Add"} onClick={() => {}} />
@@ -31,7 +34,16 @@ const styles = StyleSheet.create({
     borderTopEndRadius: 20,
     borderTopStartRadius: 20,
   },
+  recordContainer: {
+    flex: 0,
+  },
+  inputContainer: {
+    flex: 3,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   buttonContainer: {
+    flex: 2,
     justifyContent: "center",
     alignItems: "center",
   },
