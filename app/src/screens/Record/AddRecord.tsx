@@ -12,13 +12,13 @@ export const AddRecord: React.FC = () => {
     const keyboardDidShowListener = Keyboard.addListener(
       "keyboardDidShow",
       () => {
-        setKeyboardVisible(true); // or some other action
+        setKeyboardVisible(true);
       }
     );
     const keyboardDidHideListener = Keyboard.addListener(
       "keyboardDidHide",
       () => {
-        setKeyboardVisible(false); // or some other action
+        setKeyboardVisible(false);
       }
     );
 
@@ -39,9 +39,30 @@ export const AddRecord: React.FC = () => {
         <View style={styles.recordContainer}>
           <RecordType doneSelecting={(rec) => handleTypeChange(rec)} />
         </View>
-        <View style={styles.inputContainer}>
+        <View
+          style={[
+            styles.inputContainer,
+            {
+              justifyContent: isKeyboardVisible ? "flex-start" : "center",
+              marginTop: isKeyboardVisible ? 20 : 0,
+            },
+          ]}
+        >
           {recType ? (
-            <BasicInput nums={true} placeholder={recType.placeholder!} />
+            <>
+              <Text
+                style={{
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  alignSelf: "flex-start",
+                  marginLeft: 20,
+                  fontSize: 22,
+                }}
+              >
+                {recType.icon} {recType.value}
+              </Text>
+              <BasicInput nums={true} placeholder={recType.placeholder!} />
+            </>
           ) : (
             <Text>?</Text>
           )}
