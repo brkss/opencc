@@ -2,12 +2,18 @@ import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { RecordTypeElement } from ".";
 import { data } from "../../utils/data/recordtypes.data";
+import { IRecord } from "../../utils/types/Record.interface";
 
-export const RecordType: React.FC = () => {
+interface Props {
+  doneSelecting: (rec: IRecord) => void;
+}
+
+export const RecordType: React.FC<Props> = ({ doneSelecting }) => {
   const [selectedType, SetSelectedType] = React.useState<number>(-1);
 
-  const handleSelectingType = (key: number) => {
+  const handleSelectingType = (rec: IRecord, key: number) => {
     SetSelectedType(key);
+    doneSelecting(rec);
   };
 
   return (
@@ -20,7 +26,7 @@ export const RecordType: React.FC = () => {
       >
         {data.map((record, key) => (
           <RecordTypeElement
-            onSelect={() => handleSelectingType(key)}
+            onSelect={() => handleSelectingType(record, key)}
             selected={key == selectedType}
             {...record}
             key={key}

@@ -1,17 +1,50 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Keyboard } from "react-native";
 import { RecordType, Button, BasicInput } from "../../components";
+import { IRecord } from "../../utils/types/Record.interface";
 
 export const AddRecord: React.FC = () => {
+  const [recType, SetRecType] = React.useState<IRecord>();
+
+  const [isKeyboardVisible, setKeyboardVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      "keyboardDidShow",
+      () => {
+        setKeyboardVisible(true); // or some other action
+      }
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      "keyboardDidHide",
+      () => {
+        setKeyboardVisible(false); // or some other action
+      }
+    );
+
+    return () => {
+      keyboardDidHideListener.remove();
+      keyboardDidShowListener.remove();
+    };
+  }, []);
+  const handleTypeChange = (rec: IRecord) => {
+    SetRecType(rec);
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.wraper}>
+      <View
+        style={[styles.wraper, { height: isKeyboardVisible ? "80%" : "60%" }]}
+      >
         <View style={styles.recordContainer}>
-          <RecordType />
+          <RecordType doneSelecting={(rec) => handleTypeChange(rec)} />
         </View>
         <View style={styles.inputContainer}>
-          <BasicInput placeholder={"Glucose"} />
-          <BasicInput placeholder={"Units"} />
+          {recType ? (
+            <BasicInput nums={true} placeholder={recType.placeholder!} />
+          ) : (
+            <Text>?</Text>
+          )}
         </View>
         <View style={styles.buttonContainer}>
           <Button name={"Add"} onClick={() => {}} />
@@ -28,7 +61,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   wraper: {
-    height: "50%",
+    height: "70%",
     width: "100%",
     backgroundColor: "#fff",
     borderTopEndRadius: 20,
