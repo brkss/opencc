@@ -1,12 +1,15 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { RecordType } from "../../components";
+import { RecordType, Button } from "../../components";
 
 export const AddRecord: React.FC = () => {
   return (
     <View style={styles.container}>
       <View style={styles.wraper}>
         <RecordType />
+        <View style={styles.buttonContainer}>
+          <Button name={"Add"} onClick={() => {}} />
+        </View>
       </View>
     </View>
   );
@@ -24,5 +27,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderTopEndRadius: 20,
     borderTopStartRadius: 20,
+  },
+  buttonContainer: {
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
