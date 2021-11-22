@@ -1,12 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { RecordsHistory } from "../../components";
+import { RecordType } from "../../components";
 
 export const AddRecord: React.FC = () => {
   return (
     <View style={styles.container}>
       <View style={styles.wraper}>
-        <RecordsHistory />
+        <RecordType />
       </View>
     </View>
   );
