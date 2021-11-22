@@ -1,12 +1,15 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { RecordType, Button } from "../../components";
+import { RecordType, Button, BasicInput } from "../../components";
 
 export const AddRecord: React.FC = () => {
   return (
     <View style={styles.container}>
       <View style={styles.wraper}>
         <RecordType />
+        <View>
+          <BasicInput />
+        </View>
         <View style={styles.buttonContainer}>
           <Button name={"Add"} onClick={() => {}} />
         </View>
