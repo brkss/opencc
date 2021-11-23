@@ -1,14 +1,23 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 
+const data = {
+  time: 21,
+};
+
 export const BgInsulinTimer: React.FC = () => {
+  const calcRestTime = () => {
+    return 100 - (Math.abs(data.time - new Date().getHours()) * 100) / 24;
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Background Insulin</Text>
+      <Text style={styles.label}>
+        Background Insulin in {Math.abs(data.time - new Date().getHours())}{" "}
+        Hours
+      </Text>
       <View style={styles.bar}>
-        <View style={styles.timeLeft}>
-          <Text style={styles.time}>15 Hours</Text>
-        </View>
+        <View style={[styles.timeLeft, { width: calcRestTime() }]}></View>
       </View>
     </View>
   );
