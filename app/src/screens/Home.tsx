@@ -32,7 +32,7 @@ export const Home: React.FC<any> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ffeae7",
+    backgroundColor: "#ffffff",
   },
   timer: {
     flex: 3,

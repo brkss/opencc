@@ -19,7 +19,7 @@ export const Button: React.FC<Props> = ({ onClick, name }) => {
 const styles = StyleSheet.create({
   container: {
     width: width * 0.9,
-    backgroundColor: "blue",
+    backgroundColor: "#020a11",
     padding: 15,
     borderRadius: 7,
   },
@@ -27,6 +27,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
     fontSize: 21,
-    color: "white",
+    color: "#dee1e3",
   },
 });

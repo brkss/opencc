@@ -7,6 +7,7 @@ export const Timer: React.FC = () => {
       <View style={styles.circle}>
         <Text style={styles.time}>02:32</Text>
         <Text style={styles.info}>Fast-Acting insulin</Text>
+        <Text style={styles.purpose}>Dinner</Text>
       </View>
     </View>
   );
@@ -18,15 +19,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingTop: 40,
-    backgroundColor: "#5761f2",
+    backgroundColor: "#7eb99c",
   },
   circle: {
     height: 260,
     width: 260,
-    backgroundColor: "#f9dad0",
+    backgroundColor: "#d5e9df",
     borderRadius: 1000,
     borderColor: "#5761f2",
-    borderWidth: 10,
+    //borderWidth: 10,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -39,5 +40,9 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: "black",
     fontWeight: "bold",
+  },
+  purpose: {
+    fontSize: 18,
+    marginTop: 10,
   },
 });

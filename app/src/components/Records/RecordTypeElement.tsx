@@ -27,7 +27,7 @@ export const RecordTypeElement: React.FC<Props> = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#f9dad0",
+    backgroundColor: "#dee1e3",
     padding: 15,
     borderRadius: 100,
     height: 100,
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginRight: 7,
     marginLeft: 5,
-    borderColor: "#5761f2",
+    borderColor: "#5f5e5e",
     //borderWidth: 3,
   },
   icon: {
