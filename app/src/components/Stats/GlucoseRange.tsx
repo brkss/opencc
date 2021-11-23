@@ -1,21 +1,27 @@
 import React from "react";
 import { View, StyleSheet, Dimensions, Text } from "react-native";
 
+const data = {
+  low: "10%",
+  normal: "50%",
+  high: "40%",
+};
+
 const { width } = Dimensions.get("window");
 
 export const GlucoseRange: React.FC = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>70% in Range</Text>
+      <Text style={styles.label}>{data.normal} in Range</Text>
       <View style={styles.bar}>
-        <View style={styles.upRange}>
-          <Text style={styles.num}>20%</Text>
+        <View style={[styles.upRange, { width: data.high }]}>
+          <Text style={styles.num}>{data.high}</Text>
         </View>
-        <View style={styles.inRange}>
-          <Text style={styles.num}>70%</Text>
+        <View style={[styles.inRange, { width: data.normal }]}>
+          <Text style={styles.num}>{data.normal}</Text>
         </View>
-        <View style={styles.downRange}>
-          <Text style={styles.num}>10%</Text>
+        <View style={[styles.downRange, { width: data.low }]}>
+          <Text style={styles.num}>{data.low}</Text>
         </View>
       </View>
     </View>
