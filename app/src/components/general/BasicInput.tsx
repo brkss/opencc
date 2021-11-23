@@ -13,9 +13,14 @@ const { width } = Dimensions.get("screen");
 interface Props {
   placeholder: string;
   nums?: boolean;
+  onChange: (val: string) => void;
 }
 
-export const BasicInput: React.FC<Props> = ({ placeholder, nums }) => {
+export const BasicInput: React.FC<Props> = ({
+  placeholder,
+  nums,
+  onChange,
+}) => {
   const [text, onChangeText] = React.useState<string>();
   return (
     <SafeAreaView style={styles.container}>
@@ -23,7 +28,10 @@ export const BasicInput: React.FC<Props> = ({ placeholder, nums }) => {
         keyboardType={nums ? "numeric" : "default"}
         placeholder={placeholder}
         style={styles.input}
-        onChangeText={onChangeText}
+        onChangeText={(txt) => {
+          onChangeText(txt);
+          onChange(txt);
+        }}
         value={text}
       />
     </SafeAreaView>

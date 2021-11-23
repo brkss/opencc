@@ -5,7 +5,7 @@ import { IRecord } from "../../utils/types/Record.interface";
 
 export const AddRecord: React.FC = () => {
   const [recType, SetRecType] = React.useState<IRecord>();
-
+  const [value, SetValue] = React.useState("");
   const [isKeyboardVisible, setKeyboardVisible] = React.useState(false);
 
   React.useEffect(() => {
@@ -29,6 +29,19 @@ export const AddRecord: React.FC = () => {
   }, []);
   const handleTypeChange = (rec: IRecord) => {
     SetRecType(rec);
+  };
+
+  const handleValueChange = (val: string) => {
+    SetValue(val);
+    console.log("val -> ", val);
+  };
+
+  const saveRecord = () => {
+    const obj = {
+      ...recType,
+      val: value,
+    };
+    console.log("record => ", obj);
   };
 
   return (
@@ -61,14 +74,18 @@ export const AddRecord: React.FC = () => {
               >
                 {recType.icon} {recType.value}
               </Text>
-              <BasicInput nums={true} placeholder={recType.placeholder!} />
+              <BasicInput
+                onChange={(val) => handleValueChange(val)}
+                nums={true}
+                placeholder={recType.placeholder!}
+              />
             </>
           ) : (
-            <Text>?</Text>
+            <Text style={{ fontWeight: "bold" }}>?</Text>
           )}
         </View>
         <View style={styles.buttonContainer}>
-          <Button name={"Add"} onClick={() => {}} />
+          <Button name={"Record"} onClick={() => saveRecord()} />
         </View>
       </View>
     </View>
