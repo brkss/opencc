@@ -2,6 +2,8 @@ import React from "react";
 import { View, Text, StyleSheet, Keyboard } from "react-native";
 import { RecordType, Button, BasicInput } from "../../components";
 import { IRecord } from "../../utils/types/Record.interface";
+import { initDatabase } from "../../utils/database/init";
+import { addRecord, recordList } from "../../utils/database/worker";
 
 export const AddRecord: React.FC = () => {
   const [recType, SetRecType] = React.useState<IRecord>();
@@ -41,7 +43,10 @@ export const AddRecord: React.FC = () => {
       ...recType,
       val: value,
     };
-    console.log("record => ", obj);
+    initDatabase();
+    addRecord(obj.val, obj.placeholder!);
+
+    console.log("record => ", recordList());
   };
 
   return (
