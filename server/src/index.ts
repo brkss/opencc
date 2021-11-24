@@ -1,13 +1,14 @@
+import "dotenv/config";
 import "reflect-metadata";
-//import { createConnection } from "typeorm";
-//import { User } from "./entity/User";
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 import { UserResolver } from "./resolvers";
 
 (async () => {
+  // init express
   const app = express();
+  // init apollo !
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
       resolvers: [UserResolver],
@@ -18,7 +19,7 @@ import { UserResolver } from "./resolvers";
   app.get("/", (_, res) => {
     res.send("Hello !");
   });
-  app.listen(8000, () => {
+  app.listen(process.env.PORT || 4000, () => {
     console.log("🚀 Server runing at http://127.0.0.1:8000");
   });
 })();
