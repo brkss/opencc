@@ -7,13 +7,22 @@ interface Props {
   label?: string;
   value: string;
   icon: string;
+  unit: string;
 }
 
-export const Record: React.FC<Props> = ({ icon, value, label, onDelete }) => {
+export const Record: React.FC<Props> = ({
+  icon,
+  value,
+  label,
+  onDelete,
+  unit,
+}) => {
   return (
     <TouchableOpacity style={styles.container} onLongPress={() => onDelete()}>
       <Text style={styles.icon}>{icon}</Text>
-      <Text style={styles.value}>{value}</Text>
+      <Text style={styles.value}>
+        {value} {unit}
+      </Text>
     </TouchableOpacity>
   );
 };

@@ -6,6 +6,7 @@ interface ICreateRecord {
   label: string;
   icon: string;
   syncd?: boolean;
+  unit: string;
 }
 
 /*
@@ -30,13 +31,15 @@ export class RecordRepository {
     value,
     label,
     icon,
+    unit,
   }: ICreateRecord): Promise<Boolean> {
-    if (!value || !label || !icon) return false;
+    if (!value || !label || !icon || !unit) return false;
     try {
       const record = this._ormRepository.create({
         label: label,
         value: value,
         icon: icon,
+        unit: unit,
         syncd: false,
       });
       await this._ormRepository.save(record);

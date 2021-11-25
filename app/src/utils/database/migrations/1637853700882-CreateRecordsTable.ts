@@ -19,6 +19,10 @@ export class CreateRecordsTable1637853700882 implements MigrationInterface {
             type: "text",
           },
           {
+            name: "unit",
+            type: "text",
+          },
+          {
             name: "icon",
             type: "text",
           },

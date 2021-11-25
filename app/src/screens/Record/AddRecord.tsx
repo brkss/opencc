@@ -47,6 +47,7 @@ export const AddRecord: React.FC = () => {
       value: obj.val,
       label: obj.placeholder as string,
       icon: obj.icon as string,
+      unit: obj.unit as string,
     });
     if (resp) {
       console.log("Record created successfuly ");
