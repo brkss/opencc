@@ -46,6 +46,7 @@ export const AddRecord: React.FC = () => {
     const resp = await recordsRepository.createRecord({
       value: obj.val,
       label: obj.placeholder as string,
+      icon: obj.icon as string,
     });
     if (resp) {
       console.log("Record created successfuly ");

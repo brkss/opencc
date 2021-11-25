@@ -18,6 +18,9 @@ export class Record {
   label: string;
 
   @Column()
+  icon: string;
+
+  @Column()
   syncd: boolean;
 
   @CreateDateColumn()

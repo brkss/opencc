@@ -19,7 +19,7 @@ export const RecordsHistory: React.FC<Props> = ({ records, deleteRec }) => {
       >
         {records.map((record, key) => (
           <Record
-            icon={"🥬"}
+            icon={record.icon}
             onDelete={() => deleteRec(record.id!)}
             label={record.label}
             value={record.value}

@@ -4,6 +4,7 @@ import { Record } from "../entities/Record.entity";
 interface ICreateRecord {
   value: string;
   label: string;
+  icon: string;
   syncd?: boolean;
 }
 
@@ -25,12 +26,17 @@ export class RecordRepository {
     return await this._ormRepository.find();
   }
 
-  public async createRecord({ value, label }: ICreateRecord): Promise<Boolean> {
-    if (!value || !label) return false;
+  public async createRecord({
+    value,
+    label,
+    icon,
+  }: ICreateRecord): Promise<Boolean> {
+    if (!value || !label || !icon) return false;
     try {
       const record = this._ormRepository.create({
         label: label,
         value: value,
+        icon: icon,
         syncd: false,
       });
       await this._ormRepository.save(record);
