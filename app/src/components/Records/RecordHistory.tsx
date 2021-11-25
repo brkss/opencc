@@ -2,6 +2,9 @@ import React from "react";
 import { View, StyleSheet, ScrollView, Text } from "react-native";
 import { Record } from ".";
 import { data } from "../../utils/data/records.data";
+import { openDatabase } from "expo-sqlite";
+
+const db = openDatabase("db");
 
 export const RecordsHistory: React.FC = () => {
   return (

@@ -1,3 +1,4 @@
+import { openDatabase } from "expo-sqlite";
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import {
@@ -7,8 +8,27 @@ import {
   BgInsulinTimer,
   RecordsHistory,
 } from "../components";
+import { useIsFocused } from "@react-navigation/native";
+
+const db = openDatabase("db");
 
 export const Home: React.FC<any> = ({ navigation }) => {
+  const isFocus = useIsFocused();
+  const [records, SetRecords] = React.useState([]);
+
+  React.useEffect(() => {
+    getRecords();
+  }, [isFocus]);
+
+  const getRecords = () => {
+    db.transaction((tx) => {
+      tx.executeSql("SELECT * FROM records", [], (_, { rows }) => {
+        SetRecords(rows._array as any);
+        console.log(rows._array);
+      });
+    });
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.timer}>

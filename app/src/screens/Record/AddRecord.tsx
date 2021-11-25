@@ -3,7 +3,10 @@ import { View, Text, StyleSheet, Keyboard } from "react-native";
 import { RecordType, Button, BasicInput } from "../../components";
 import { IRecord } from "../../utils/types/Record.interface";
 import { initDatabase } from "../../utils/database/init";
-import { addRecord, recordList } from "../../utils/database/worker";
+import { addRecord } from "../../utils/database/worker";
+import { openDatabase } from "expo-sqlite";
+
+//const db = openDatabase("db");
 
 export const AddRecord: React.FC = () => {
   const [recType, SetRecType] = React.useState<IRecord>();
@@ -43,10 +46,8 @@ export const AddRecord: React.FC = () => {
       ...recType,
       val: value,
     };
-    initDatabase();
-    addRecord(obj.val, obj.placeholder!);
-
-    console.log("record => ", recordList());
+    //initDatabase();
+    //addRecord(obj.val, obj.placeholder!);
   };
 
   return (
