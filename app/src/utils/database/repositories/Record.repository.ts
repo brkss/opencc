@@ -7,6 +7,13 @@ interface ICreateRecord {
   syncd?: boolean;
 }
 
+/*
+interface ICreateRecordResponse {
+  status: boolean;
+  message?: string;
+  record?:
+}
+*/
 export class RecordRepository {
   private _ormRepository: Repository<Record>;
 

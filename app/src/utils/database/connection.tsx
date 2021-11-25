@@ -24,7 +24,7 @@ export const DatabaseConnectionProvider: React.FC = ({ children }) => {
       entities: [Record],
       migrations: [CreateRecordsTable1637853700882],
       migrationsRun: false,
-      synchronize: false,
+      synchronize: true,
     });
     //.catch((e) => console.log("error accured connecting to db -> ", e));
     console.log("tried to connect !");

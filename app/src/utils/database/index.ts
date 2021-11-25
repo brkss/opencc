@@ -1,1 +1,4 @@
-export { DatabaseConnectionProvider } from "./connection";
+export {
+  DatabaseConnectionProvider,
+  useDatabaseConnection,
+} from "./connection";
