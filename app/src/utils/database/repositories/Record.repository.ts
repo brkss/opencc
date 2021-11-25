@@ -40,4 +40,14 @@ export class RecordRepository {
       return false;
     }
   }
+
+  public async deleteRecord(id: string): Promise<boolean> {
+    try {
+      await this._ormRepository.delete(id);
+      return true;
+    } catch (e) {
+      console.log(`error accured while trying to delete this record ${id}`);
+      return false;
+    }
+  }
 }

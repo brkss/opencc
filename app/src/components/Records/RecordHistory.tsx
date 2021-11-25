@@ -1,12 +1,14 @@
 import React from "react";
 import { View, StyleSheet, ScrollView, Text } from "react-native";
 import { Record } from ".";
-import { data } from "../../utils/data/records.data";
-import { openDatabase } from "expo-sqlite";
+import { Record as IRecord } from "../../utils/database/entities";
 
-const db = openDatabase("db");
+interface Props {
+  records: IRecord[];
+  deleteRec: (id: string) => void;
+}
 
-export const RecordsHistory: React.FC = () => {
+export const RecordsHistory: React.FC<Props> = ({ records, deleteRec }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>Last Records</Text>
@@ -15,8 +17,14 @@ export const RecordsHistory: React.FC = () => {
         style={{ marginTop: 5 }}
         showsHorizontalScrollIndicator={false}
       >
-        {data.map((record, key) => (
-          <Record {...record} key={key} />
+        {records.map((record, key) => (
+          <Record
+            icon={"🥬"}
+            onDelete={() => deleteRec(record.id!)}
+            label={record.label}
+            value={record.value}
+            key={key}
+          />
         ))}
       </ScrollView>
     </View>

@@ -2,16 +2,13 @@ import React from "react";
 import { View, Text, StyleSheet, Keyboard } from "react-native";
 import { RecordType, Button, BasicInput } from "../../components";
 import { IRecord } from "../../utils/types/Record.interface";
-import { initDatabase } from "../../utils/database/init";
-import { addRecord } from "../../utils/database/worker";
-import { openDatabase } from "expo-sqlite";
-
-//const db = openDatabase("db");
+import { useDatabaseConnection } from "../../utils/database";
 
 export const AddRecord: React.FC = () => {
   const [recType, SetRecType] = React.useState<IRecord>();
   const [value, SetValue] = React.useState("");
   const [isKeyboardVisible, setKeyboardVisible] = React.useState(false);
+  const { recordsRepository } = useDatabaseConnection();
 
   React.useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -41,13 +38,20 @@ export const AddRecord: React.FC = () => {
     console.log("val -> ", val);
   };
 
-  const saveRecord = () => {
+  const saveRecord = async () => {
     const obj = {
       ...recType,
       val: value,
     };
-    //initDatabase();
-    //addRecord(obj.val, obj.placeholder!);
+    const resp = await recordsRepository.createRecord({
+      value: obj.val,
+      label: obj.placeholder as string,
+    });
+    if (resp) {
+      console.log("Record created successfuly ");
+    } else {
+      console.log("Something went wrong creating record !");
+    }
   };
 
   return (

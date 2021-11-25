@@ -1,13 +1,20 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { TouchableOpacity, Text, StyleSheet } from "react-native";
 import { IRecord } from "../../utils/types/Record.interface";
 
-export const Record: React.FC<IRecord> = ({ icon, value }) => {
+interface Props {
+  onDelete: () => void;
+  label?: string;
+  value: string;
+  icon: string;
+}
+
+export const Record: React.FC<Props> = ({ icon, value, label, onDelete }) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onLongPress={() => onDelete()}>
       <Text style={styles.icon}>{icon}</Text>
       <Text style={styles.value}>{value}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

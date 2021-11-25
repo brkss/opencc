@@ -9,24 +9,29 @@ import {
   RecordsHistory,
 } from "../components";
 import { useIsFocused } from "@react-navigation/native";
-
-const db = openDatabase("db");
+import { useDatabaseConnection } from "../utils/database";
 
 export const Home: React.FC<any> = ({ navigation }) => {
   const isFocus = useIsFocused();
-  const [records, SetRecords] = React.useState([]);
+  const [records, SetRecords] = React.useState<any[]>([]);
+  const { recordsRepository } = useDatabaseConnection();
 
   React.useEffect(() => {
     getRecords();
   }, [isFocus]);
 
   const getRecords = () => {
-    db.transaction((tx) => {
-      tx.executeSql("SELECT * FROM records", [], (_, { rows }) => {
-        SetRecords(rows._array as any);
-        console.log(rows._array);
-      });
+    recordsRepository.getAll().then((recs) => {
+      SetRecords(recs);
+      console.log("recs => ", recs);
     });
+  };
+
+  const deleteRecord = async (id: string) => {
+    const res = await recordsRepository.deleteRecord(id);
+    if (res) {
+      SetRecords((curr) => curr.filter((rec) => rec.id != id));
+    }
   };
 
   return (
@@ -37,7 +42,10 @@ export const Home: React.FC<any> = ({ navigation }) => {
       <View style={styles.info}>
         <BgInsulinTimer />
         <GlucoseRange />
-        <RecordsHistory />
+        <RecordsHistory
+          records={records}
+          deleteRec={(id) => deleteRecord(id)}
+        />
       </View>
       <View style={styles.buttonContainer}>
         <Button
