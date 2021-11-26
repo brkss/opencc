@@ -4,7 +4,7 @@ import { RecordType, Button, BasicInput } from "../../components";
 import { IRecord } from "../../utils/types/Record.interface";
 import { useDatabaseConnection } from "../../utils/database";
 
-export const AddRecord: React.FC = () => {
+export const AddRecord: React.FC<any> = ({ navigation }) => {
   const [recType, SetRecType] = React.useState<IRecord>();
   const [value, SetValue] = React.useState("");
   const [isKeyboardVisible, setKeyboardVisible] = React.useState(false);
@@ -50,6 +50,7 @@ export const AddRecord: React.FC = () => {
       unit: obj.unit as string,
     });
     if (resp) {
+      navigation.goBack();
       console.log("Record created successfuly ");
     } else {
       console.log("Something went wrong creating record !");

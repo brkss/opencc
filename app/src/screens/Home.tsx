@@ -1,6 +1,5 @@
-import { openDatabase } from "expo-sqlite";
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import {
   Button,
   Timer,
@@ -22,7 +21,7 @@ export const Home: React.FC<any> = ({ navigation }) => {
 
   const getRecords = () => {
     recordsRepository.getAll().then((recs) => {
-      SetRecords(recs);
+      SetRecords(recs.reverse());
       console.log("recs => ", recs);
     });
   };
