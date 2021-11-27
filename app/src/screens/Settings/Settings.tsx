@@ -2,14 +2,18 @@ import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { SettingsElement } from "../../components";
 
-export const Settings: React.FC = () => {
+export const Settings: React.FC<any> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Settings</Text>
       </View>
       <View style={styles.contentContainer}>
-        <SettingsElement onClick={() => {}} icon={"🥗"} title={"Meal Time"} />
+        <SettingsElement
+          onClick={() => navigation.navigate("meal-time")}
+          icon={"🥗"}
+          title={"Meal Time"}
+        />
       </View>
     </View>
   );

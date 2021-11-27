@@ -1,6 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Home, AddRecord, Settings } from "../screens";
+import { Home, AddRecord, Settings, MealTime } from "../screens";
 
 export const AppNavigation: React.FC = () => {
   const { Navigator, Screen, Group } = createStackNavigator();
@@ -17,6 +17,9 @@ export const AppNavigation: React.FC = () => {
         }}
       >
         <Screen name={"add-record"} component={AddRecord} />
+      </Group>
+      <Group screenOptions={{ presentation: "modal" }}>
+        <Screen name={"meal-time"} component={MealTime} />
       </Group>
     </Navigator>
   );
