@@ -8,9 +8,9 @@ interface Props {
   onClick: () => void;
 }
 
-export const IconButton: React.FC<Props> = ({ icon, color }) => {
+export const IconButton: React.FC<Props> = ({ icon, color, onClick }) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={() => onClick()}>
       <Feather name={icon as any} size={27} color={color ? color : "black"} />
     </TouchableOpacity>
   );
