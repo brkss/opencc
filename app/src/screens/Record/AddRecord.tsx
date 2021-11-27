@@ -89,7 +89,7 @@ export const AddRecord: React.FC<any> = ({ navigation }) => {
               </Text>
               <BasicInput
                 onChange={(val) => handleValueChange(val)}
-                nums={true}
+                nums={false}
                 placeholder={recType.placeholder!}
               />
             </>
