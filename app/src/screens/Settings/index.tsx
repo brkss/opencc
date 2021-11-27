@@ -9,7 +9,7 @@ export const Settings: React.FC = () => {
         <Text style={styles.title}>Settings</Text>
       </View>
       <View style={styles.contentContainer}>
-        <SettingsElement />
+        <SettingsElement onClick={() => {}} icon={"🥗"} title={"Meal Time"} />
       </View>
     </View>
   );
