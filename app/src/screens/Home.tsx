@@ -6,6 +6,7 @@ import {
   GlucoseRange,
   BgInsulinTimer,
   RecordsHistory,
+  TopNavigation,
 } from "../components";
 import { useIsFocused } from "@react-navigation/native";
 import { useDatabaseConnection } from "../utils/database";
@@ -35,6 +36,7 @@ export const Home: React.FC<any> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <TopNavigation />
       <View style={styles.timer}>
         <Timer />
       </View>
