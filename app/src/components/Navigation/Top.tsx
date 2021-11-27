@@ -3,10 +3,17 @@ import { View, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { IconButton } from "..";
 
-export const TopNavigation: React.FC = () => {
+interface Props {
+  navigation: any;
+}
+
+export const TopNavigation: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <IconButton icon={"settings"} onClick={() => console.log("navigate")} />
+      <IconButton
+        icon={"settings"}
+        onClick={() => navigation.navigate("settings")}
+      />
     </View>
   );
 };

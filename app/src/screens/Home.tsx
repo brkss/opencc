@@ -36,7 +36,7 @@ export const Home: React.FC<any> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <TopNavigation />
+      <TopNavigation navigation={navigation} />
       <View style={styles.timer}>
         <Timer />
       </View>
