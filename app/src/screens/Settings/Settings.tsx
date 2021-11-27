@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
-import { SettingsElement } from "../../components";
+import { SettingsElement, BgInsulinTime } from "../../components";
 
 export const Settings: React.FC<any> = ({ navigation }) => {
   return (
@@ -14,6 +14,7 @@ export const Settings: React.FC<any> = ({ navigation }) => {
           icon={"🥗"}
           title={"Meal Time"}
         />
+        <BgInsulinTime />
       </View>
     </View>
   );
@@ -22,12 +23,12 @@ export const Settings: React.FC<any> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 12,
   },
   titleContainer: {
     flex: 0.5,
     justifyContent: "flex-end",
     paddingBottom: 15,
-    paddingLeft: 15,
   },
   title: {
     fontSize: 30,
