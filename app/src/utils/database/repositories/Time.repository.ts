@@ -1,5 +1,5 @@
 import { Connection, Repository } from "typeorm";
-import { TimeEntity } from "../entities/Time.entity";
+import { TimeEntity } from "../entities";
 
 interface ICreateTime {
   type: string;

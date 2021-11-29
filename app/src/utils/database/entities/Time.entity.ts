@@ -6,7 +6,7 @@ import {
 } from "typeorm";
 
 @Entity()
-export class Time {
+export class TimeEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
