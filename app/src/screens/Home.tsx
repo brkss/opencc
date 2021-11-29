@@ -14,7 +14,7 @@ import { useDatabaseConnection } from "../utils/database";
 export const Home: React.FC<any> = ({ navigation }) => {
   const isFocus = useIsFocused();
   const [records, SetRecords] = React.useState<any[]>([]);
-  const [bgTime, SetBgTime] = React.useState(new Date().getHours());
+  const [bgTime, SetBgTime] = React.useState(new Date());
   const { timeRepository, recordsRepository } = useDatabaseConnection();
 
   React.useEffect(() => {
@@ -27,7 +27,7 @@ export const Home: React.FC<any> = ({ navigation }) => {
       console.log("recs => ", recs);
     });
     timeRepository.time("BG_INSULIN").then((res) => {
-      SetBgTime(new Date(res[0].time).getHours());
+      SetBgTime(new Date(res[0].time));
     });
   };
 
