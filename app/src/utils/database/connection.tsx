@@ -1,12 +1,13 @@
 import React from "react";
 import { Connection, createConnection } from "typeorm";
 import { ActivityIndicator, Text } from "react-native";
-import { Record } from "./entities";
+import { Record, TimeEntity } from "./entities";
 import { CreateRecordsTable1637853700882 } from "./migrations";
-import { RecordRepository } from "./repositories";
+import { RecordRepository, TimeRepository } from "./repositories";
 
 interface DatabaseConnectionContextData {
   recordsRepository: RecordRepository;
+  timeRepository: TimeRepository;
 }
 
 const DatabaseConnectionContext =
@@ -21,7 +22,7 @@ export const DatabaseConnectionProvider: React.FC = ({ children }) => {
       type: "expo",
       database: "db",
       driver: require("expo-sqlite"),
-      entities: [Record],
+      entities: [Record, TimeEntity],
       migrations: [CreateRecordsTable1637853700882],
       migrationsRun: false,
       synchronize: true,
@@ -43,6 +44,7 @@ export const DatabaseConnectionProvider: React.FC = ({ children }) => {
     <DatabaseConnectionContext.Provider
       value={{
         recordsRepository: new RecordRepository(connection),
+        timeRepository: new TimeRepository(connection),
       }}
     >
       {children}
