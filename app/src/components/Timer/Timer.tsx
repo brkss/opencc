@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingTop: 40,
-    backgroundColor: "#7eb99c",
+    //backgroundColor: "#7eb99c",
   },
   circle: {
     height: 260,
