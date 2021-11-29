@@ -4,10 +4,17 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { useDatabaseConnection } from "../../utils/database";
 
 export const BgInsulinTime: React.FC = () => {
-  const [date, setDate] = React.useState(new Date(1598051730000));
+  const [date, setDate] = React.useState(new Date());
   const [mode, setMode] = React.useState<any>("time");
-  const [show, setShow] = React.useState(false);
   const { timeRepository } = useDatabaseConnection();
+
+  React.useEffect(() => {
+    (async () => {
+      const registredTime = await timeRepository.time("BG_INSULIN");
+      console.log("registred time => ", new Date(registredTime[0].time));
+      setDate(new Date(registredTime[0].time) || new Date().getTime());
+    })();
+  }, []);
 
   const onChange = async (event: any, selectedDate: any) => {
     const currentDate = selectedDate || date;

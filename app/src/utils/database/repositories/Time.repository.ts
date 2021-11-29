@@ -14,8 +14,8 @@ export class TimeRepository {
     this._ormRepository = connection.getRepository(TimeEntity);
   }
 
-  public async time(): Promise<TimeEntity[]> {
-    return await this._ormRepository.find();
+  public async time(type: string): Promise<TimeEntity[]> {
+    return await this._ormRepository.find({ where: { type: type } });
   }
 
   public async add({ time, name, type }: ICreateTime): Promise<boolean> {
