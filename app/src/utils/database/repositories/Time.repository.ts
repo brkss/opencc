@@ -21,9 +21,8 @@ export class TimeRepository {
   public async add({ time, name, type }: ICreateTime): Promise<boolean> {
     if (!time || !name || !type) return false;
     try {
-      if (type == "BG_INSULIN")
-        // because only one background insulin time should exesit ! for now atleast
-        await this._ormRepository.delete({ type: type });
+      // because only one background insulin time should exesit ! for now atleast
+      await this._ormRepository.delete({ type: type });
       const timeRec = this._ormRepository.create({
         name: name,
         time: time,
