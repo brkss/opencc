@@ -8,11 +8,24 @@ interface Props {
 }
 
 export const Meal: React.FC<Props> = ({ mealTitle }) => {
-  const [date, setDate] = React.useState(new Date(1598051730000));
+  const [date, setDate] = React.useState(new Date());
   const [mode, setMode] = React.useState<any>("time");
   const [show, setShow] = React.useState(false);
   const { timeRepository } = useDatabaseConnection();
 
+  // get meal time !
+  const mealsTime = async () => {
+    const res = await timeRepository.time(`MEAL_${mealTitle.split(" ")[0]}`);
+    if (res.length > 0) {
+      setDate(new Date(res[0].time));
+    }
+  };
+
+  React.useEffect(() => {
+    mealsTime();
+  }, []);
+
+  // handle time change , create and update meal time !
   const onChange = async (event: any, selectedDate: any) => {
     const currentDate = selectedDate || date;
     const dt = {
