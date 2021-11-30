@@ -1,7 +1,40 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
+import { useTimer } from "react-timer-hook";
+import { useDatabaseConnection } from "../../utils/database";
+import moment from "moment";
 
 export const Timer: React.FC = () => {
+  const { timeRepository } = useDatabaseConnection();
+  const [expire, setExpire] = React.useState(new Date());
+
+  React.useEffect(() => {
+    (async () => {
+      await getNextMeal();
+    })();
+  }, []);
+  const getNextMeal = async () => {
+    const meals = await timeRepository.meals();
+    // calculate minutes in day !
+    const dm = (m: any) => {
+      return m.minutes() + m.hours() * 60;
+    };
+    let exp = {
+      dm: null as any,
+      time: null as any,
+    };
+    for (let meal of meals) {
+      const time = moment(meal.time);
+      if (dm(time) > dm(moment())) {
+        if (!exp.dm || exp.time > dm(time))
+          exp = { dm: dm(time), time: meal.time };
+      }
+    }
+    console.log("next meal =>  : ", exp);
+    console.log("------");
+    console.log("Meals => ", meals);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.circle}>

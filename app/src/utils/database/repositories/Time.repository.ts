@@ -35,4 +35,17 @@ export class TimeRepository {
       return false;
     }
   }
+
+  public async meals(): Promise<TimeEntity[] | []> {
+    try {
+      const meals = await this._ormRepository
+        .createQueryBuilder("times")
+        .where("times.type like :type", { type: "MEAL_%" })
+        .getMany();
+      return meals;
+    } catch (e) {
+      console.log("Something went wrong finding meal ! ERR : ", e);
+      return [];
+    }
+  }
 }
