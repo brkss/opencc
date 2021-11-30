@@ -27,12 +27,21 @@ export const Timer: React.FC = () => {
       const time = moment(meal.time);
       if (dm(time) > dm(moment())) {
         if (!exp.dm || exp.time > dm(time))
-          exp = { dm: dm(time), time: meal.time };
+          exp = {
+            dm: dm(time),
+            time: meal.time,
+          };
       }
     }
-    console.log("next meal =>  : ", exp);
-    console.log("------");
-    console.log("Meals => ", meals);
+    exp = {
+      dm: exp.dm,
+      time: `${new Date().toISOString().split("T")[0]}T${
+        exp.time.toISOString().split("T")[1]
+      }`,
+    };
+
+    console.log("EXPIRE : ", exp);
+    //setExpire()
   };
 
   return (
