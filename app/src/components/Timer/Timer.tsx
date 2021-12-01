@@ -1,18 +1,25 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
-import { useTimer } from "react-timer-hook";
 import { useDatabaseConnection } from "../../utils/database";
 import moment from "moment";
 
 export const Timer: React.FC = () => {
   const { timeRepository } = useDatabaseConnection();
-  const [expire, setExpire] = React.useState(new Date());
   const [mealName, setMealName] = React.useState("");
+  const [timerCount, setTimer] = React.useState(new Date().getTime());
+  const [timeRest, SetTimeRest] = React.useState("");
 
   React.useEffect(() => {
-    (async () => {
+    (() => async () => {
       await getNextMeal();
     })();
+    let interval = setInterval(async () => {
+      timerCount <= 1 && clearInterval(interval);
+      formatTime(timerCount - new Date().getTime());
+      return timerCount - new Date().getTime();
+    }, 1000); //each count lasts for a second
+    //cleanup the interval on complete
+    return () => clearInterval(interval);
   }, []);
 
   const getNextMeal = async () => {
@@ -46,14 +53,35 @@ export const Timer: React.FC = () => {
     };
 
     console.log("EXPIRE : ", exp);
-    setExpire(exp.time);
+    setTimer(new Date(exp.time).getTime());
     setMealName(exp.meal);
+  };
+
+  const stringfyTime = (time: number) => {
+    if (time == 0) return "00";
+    if (time < 10) return `0${time}`;
+    return time;
+  };
+
+  const formatTime = (time: number) => {
+    const days = Math.floor(time / 1000 / 60 / 60 / 24);
+    time -= days * 1000 * 60 * 60 * 24;
+    const hours = Math.floor(time / 1000 / 60 / 60);
+    time -= hours * 1000 * 60 * 60;
+    const minutes = Math.floor(time / 1000 / 60);
+    time -= minutes * 1000 * 60;
+    const seconds = Math.floor(time / 1000);
+
+    SetTimeRest(
+      `${stringfyTime(hours)}:${stringfyTime(minutes)}:${stringfyTime(seconds)}`
+    );
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.circle}>
-        <Text style={styles.time}>02:32</Text>
+        <Text> </Text>
+        <Text style={styles.time}> {timeRest}</Text>
         <Text style={styles.info}>Fast-Acting insulin</Text>
         <Text style={styles.purpose}>{mealName}</Text>
       </View>
