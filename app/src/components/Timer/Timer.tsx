@@ -3,60 +3,67 @@ import { View, StyleSheet, Text } from "react-native";
 import { useDatabaseConnection } from "../../utils/database";
 import moment from "moment";
 
-export const Timer: React.FC = () => {
+interface Props {
+  title: string;
+  time: number;
+}
+
+export const Timer: React.FC<Props> = ({ time, title }) => {
   const { timeRepository } = useDatabaseConnection();
-  const [mealName, setMealName] = React.useState("");
-  const [timerCount, setTimer] = React.useState(new Date().getTime());
+  const [mealName, setMealName] = React.useState(title);
+  const [timerCount, setTimer] = React.useState(time);
   const [timeRest, SetTimeRest] = React.useState("");
 
   React.useEffect(() => {
-    (() => async () => {
-      await getNextMeal();
-    })();
-    let interval = setInterval(async () => {
-      timerCount <= 1 && clearInterval(interval);
-      formatTime(timerCount - new Date().getTime());
-      return timerCount - new Date().getTime();
+    let interval = setInterval(() => {
+      console.log("TIMER COUNT : ", time);
+      //console.log("TIME NOW: ", new Date().getTime());
+      time <= 1 && clearInterval(interval);
+      formatTime(time - new Date().getTime());
+      //return timerCount - new Date().getTime();
     }, 1000); //each count lasts for a second
     //cleanup the interval on complete
+
     return () => clearInterval(interval);
   }, []);
 
-  const getNextMeal = async () => {
-    const meals = await timeRepository.meals();
-    // calculate minutes in day !
-    const dm = (m: any) => {
-      return m.minutes() + m.hours() * 60;
-    };
-    let exp = {
-      dm: null as any,
-      time: null as any,
-      meal: null as any,
-    };
-    for (let meal of meals) {
-      const time = moment(meal.time);
-      if (dm(time) > dm(moment())) {
-        if (!exp.dm || exp.dm > dm(time))
-          exp = {
-            dm: dm(time),
-            time: meal.time,
-            meal: meal.name,
-          };
+  /*
+  const getNextMeal = () => {
+    timeRepository.meals().then((meals) => {
+      // calculate minutes in day !
+      const dm = (m: any) => {
+        return m.minutes() + m.hours() * 60;
+      };
+      let exp = {
+        dm: null as any,
+        time: null as any,
+        meal: null as any,
+      };
+      for (let meal of meals) {
+        const time = moment(meal.time);
+        if (dm(time) > dm(moment())) {
+          if (!exp.dm || exp.dm > dm(time))
+            exp = {
+              dm: dm(time),
+              time: meal.time,
+              meal: meal.name,
+            };
+        }
       }
-    }
-    exp = {
-      dm: exp.dm,
-      time: `${new Date().toISOString().split("T")[0]}T${
-        exp.time.toISOString().split("T")[1]
-      }`,
-      meal: exp.meal,
-    };
+      exp = {
+        dm: exp.dm,
+        time: `${new Date().toISOString().split("T")[0]}T${
+          exp.time.toISOString().split("T")[1]
+        }`,
+        meal: exp.meal,
+      };
 
-    console.log("EXPIRE : ", exp);
-    setTimer(new Date(exp.time).getTime());
-    setMealName(exp.meal);
+      console.log("EXPIRE TIEM : ", new Date(exp.time).getTime());
+      setTimer(new Date(exp.time).getTime());
+      setMealName(exp.meal);
+    });
   };
-
+   */
   const stringfyTime = (time: number) => {
     if (time == 0) return "00";
     if (time < 10) return `0${time}`;
@@ -83,7 +90,7 @@ export const Timer: React.FC = () => {
         <Text> </Text>
         <Text style={styles.time}> {timeRest}</Text>
         <Text style={styles.info}>Fast-Acting insulin</Text>
-        <Text style={styles.purpose}>{mealName}</Text>
+        <Text style={styles.purpose}>{title}</Text>
       </View>
     </View>
   );
