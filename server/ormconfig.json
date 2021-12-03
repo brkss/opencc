@@ -6,6 +6,7 @@
   "password": "",
   "database": "opencc",
   "synchronize": true,
+  "charset": "utf8mb4_unicode_ci",
   "logging": false,
   "entities": ["dist/entity/**/*.js"],
   "migrations": ["dist/migration/**/*.js"],

@@ -9,49 +9,36 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Record = void 0;
-const typeorm_1 = require("typeorm");
+exports.CreateRecordInput = void 0;
 const type_graphql_1 = require("type-graphql");
-let Record = class Record extends typeorm_1.BaseEntity {
+let CreateRecordInput = class CreateRecordInput {
 };
 __decorate([
     (0, type_graphql_1.Field)(),
-    (0, typeorm_1.PrimaryGeneratedColumn)("uuid"),
     __metadata("design:type", String)
-], Record.prototype, "id", void 0);
+], CreateRecordInput.prototype, "id", void 0);
 __decorate([
     (0, type_graphql_1.Field)(),
-    (0, typeorm_1.Column)({ unique: true }),
     __metadata("design:type", String)
-], Record.prototype, "local_id", void 0);
+], CreateRecordInput.prototype, "label", void 0);
 __decorate([
     (0, type_graphql_1.Field)(),
-    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Record.prototype, "label", void 0);
+], CreateRecordInput.prototype, "icon", void 0);
 __decorate([
     (0, type_graphql_1.Field)(),
-    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Record.prototype, "icon", void 0);
+], CreateRecordInput.prototype, "unit", void 0);
 __decorate([
     (0, type_graphql_1.Field)(),
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Record.prototype, "unit", void 0);
-__decorate([
-    (0, type_graphql_1.Field)(),
-    (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
-], Record.prototype, "value", void 0);
+], CreateRecordInput.prototype, "value", void 0);
 __decorate([
     (0, type_graphql_1.Field)(),
-    (0, typeorm_1.Column)(),
     __metadata("design:type", Date)
-], Record.prototype, "created_at", void 0);
-Record = __decorate([
-    (0, type_graphql_1.ObjectType)(),
-    (0, typeorm_1.Entity)("records")
-], Record);
-exports.Record = Record;
-//# sourceMappingURL=Record.js.map
+], CreateRecordInput.prototype, "created_at", void 0);
+CreateRecordInput = __decorate([
+    (0, type_graphql_1.InputType)()
+], CreateRecordInput);
+exports.CreateRecordInput = CreateRecordInput;
+//# sourceMappingURL=record.input.js.map

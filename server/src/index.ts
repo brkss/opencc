@@ -3,8 +3,8 @@ import "reflect-metadata";
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
-import { UserResolver } from "./resolvers";
 import { createConnection } from "typeorm";
+import { RecordResolver } from "./resolvers";
 
 (async () => {
   await createConnection();
@@ -14,7 +14,7 @@ import { createConnection } from "typeorm";
   // init apollo !
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [UserResolver],
+      resolvers: [RecordResolver],
       validate: false,
     }),
   });
