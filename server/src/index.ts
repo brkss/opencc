@@ -4,8 +4,11 @@ import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 import { UserResolver } from "./resolvers";
+import { createConnection } from "typeorm";
 
 (async () => {
+  await createConnection();
+  const PORT = process.env.PORT || 4000;
   // init express
   const app = express();
   // init apollo !
@@ -19,8 +22,8 @@ import { UserResolver } from "./resolvers";
   app.get("/", (_, res) => {
     res.send("Hello !");
   });
-  app.listen(process.env.PORT || 4000, () => {
-    console.log("🚀 Server runing at http://127.0.0.1:8000");
+  app.listen(PORT, () => {
+    console.log(`🚀 Server runing at http://127.0.0.1:${PORT}`);
   });
 })();
 
