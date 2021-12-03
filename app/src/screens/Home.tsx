@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import {
   Button,
   Timer,
@@ -18,7 +18,7 @@ export const Home: React.FC<any> = ({ navigation }) => {
   const [bgTime, SetBgTime] = React.useState(new Date());
   const { timeRepository, recordsRepository } = useDatabaseConnection();
   const [nextMeal, setNextMeal] = React.useState({
-    time: new Date().getTime(),
+    time: 0,
     mealTitle: "",
   });
 
@@ -27,7 +27,7 @@ export const Home: React.FC<any> = ({ navigation }) => {
     getRecords();
   }, [isFocus]);
 
-  const getNextMeal = async () => {
+  const getNextMeal = () => {
     timeRepository.meals().then((meals) => {
       // calculate minutes in day !
       const dm = (m: any) => {
@@ -56,13 +56,15 @@ export const Home: React.FC<any> = ({ navigation }) => {
         }`,
         meal: exp.meal,
       };
-
+      const time = new Date(exp.time).setHours(
+        new Date(exp.time).getHours() + 1
+      );
       console.log(
         "EXPIRE TIME : ",
         new Date(exp.time).setHours(new Date(exp.time).getHours() + 1)
       );
       setNextMeal({
-        time: new Date(exp.time).setHours(new Date(exp.time).getHours() + 1),
+        time: time,
         mealTitle: exp.meal,
       });
       //setTimer(new Date(exp.time).getTime());
@@ -86,7 +88,7 @@ export const Home: React.FC<any> = ({ navigation }) => {
       SetRecords((curr) => curr.filter((rec) => rec.id != id));
     }
   };
-
+  if (nextMeal.time == 0) return <Text>Time still 0</Text>;
   return (
     <View style={styles.container}>
       <TopNavigation navigation={navigation} />

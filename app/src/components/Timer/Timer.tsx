@@ -10,19 +10,16 @@ interface Props {
 
 export const Timer: React.FC<Props> = ({ time, title }) => {
   const { timeRepository } = useDatabaseConnection();
-  const [mealName, setMealName] = React.useState(title);
-  const [timerCount, setTimer] = React.useState(time);
+  //const [mealName, setMealName] = React.useState(title);
+  //const [timerCount, setTimer] = React.useState(time);
   const [timeRest, SetTimeRest] = React.useState("");
 
   React.useEffect(() => {
     let interval = setInterval(() => {
       console.log("TIMER COUNT : ", time);
-      //console.log("TIME NOW: ", new Date().getTime());
-      time <= 1 && clearInterval(interval);
+      //time <= 1 && clearInterval(interval);
       formatTime(time - new Date().getTime());
-      //return timerCount - new Date().getTime();
-    }, 1000); //each count lasts for a second
-    //cleanup the interval on complete
+    }, 1000);
 
     return () => clearInterval(interval);
   }, []);

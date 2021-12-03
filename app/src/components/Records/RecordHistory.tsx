@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, ScrollView, Text } from "react-native";
-import { Record } from ".";
+import { Record } from "./Record";
 import { Record as IRecord } from "../../utils/database/entities";
 
 interface Props {

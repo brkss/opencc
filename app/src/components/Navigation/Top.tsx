@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import { IconButton } from "..";
+import { IconButton } from "../general/IconButton";
 
 interface Props {
   navigation: any;

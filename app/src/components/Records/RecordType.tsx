@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { RecordTypeElement } from ".";
+import { RecordTypeElement } from "./RecordTypeElement";
 import { data } from "../../utils/data/recordtypes.data";
 import { IRecord } from "../../utils/types/Record.interface";
 
