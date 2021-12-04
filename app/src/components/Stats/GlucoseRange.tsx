@@ -1,15 +1,58 @@
 import React from "react";
 import { View, StyleSheet, Dimensions, Text } from "react-native";
-
+import { useDatabaseConnection } from "../../utils/database";
+import { useIsFocused } from "@react-navigation/native";
+/*
 const data = {
   low: "10%",
   normal: "50%",
   high: "40%",
 };
-
+*/
 const { width } = Dimensions.get("window");
 
 export const GlucoseRange: React.FC = () => {
+  const { recordsRepository } = useDatabaseConnection();
+  const [data, SetData] = React.useState<any>({});
+  const isFocus = useIsFocused();
+
+  React.useEffect(() => {
+    getGlucoseData();
+  }, [isFocus]);
+
+  const calculateRanges = (highs: number, low: number, normal: number) => {
+    const data = {
+      low: "",
+      high: "",
+      normal: "",
+    };
+    const totalLen = highs + low + normal;
+    data.high = `${(highs * 100) / totalLen}%`;
+    data.normal = `${(normal * 100) / totalLen}%`;
+    data.low = `${(low * 100) / totalLen}%`;
+    return data;
+  };
+
+  const getGlucoseData = () => {
+    recordsRepository.glucoseRecords().then((records) => {
+      console.log("Glucose records ! = ", records);
+      // filter data !
+      const highs = records.filter((rec) => {
+        if (Number(rec.value) > 180) return rec.value;
+      });
+      const lows = records.filter((rec) => {
+        if (Number(rec.value) < 80) return Number(rec.value);
+      });
+      const normal = records.filter((rec) => {
+        if (Number(rec.value) > 80 && Number(rec.value) < 180)
+          return Number(rec.value);
+      });
+
+      const data = calculateRanges(highs.length, lows.length, normal.length);
+      SetData(data);
+    });
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{data.normal} in Range</Text>
