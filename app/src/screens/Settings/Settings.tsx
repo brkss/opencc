@@ -4,6 +4,7 @@ import { SettingsElement, BgInsulinTime } from "../../components";
 import { useDatabaseConnection } from "../../utils/database";
 import { useSaveRecordMutation } from "../../generated/graphql";
 import { useIsFocused } from "@react-navigation/native";
+import Toast from "react-native-toast-message";
 
 export const Settings: React.FC<any> = ({ navigation }) => {
   const [unsavedRecords, SetUnsavedRecord] = React.useState([]);
@@ -38,17 +39,36 @@ export const Settings: React.FC<any> = ({ navigation }) => {
             records: recs,
           },
         }).then((res) => {
-          // please handle error here! with toasts
-          // before forcing data defenition !
+          if (!res.data || !res.data.saveRecords || res.errors)
+            Toast.show({
+              type: "error",
+              text1: "Records update",
+              text2: "🤕 Something went wrong !",
+            });
           if (res.data && res.data.saveRecords) {
             // map ids to update sqlite
             const ids = recs.map((record) => record.id);
             //console.log("ids => ", ids);
             recordsRepository.markRecords(ids).then((res) => {
               console.log("res marking records as syncd => ", res);
+              if (res) {
+                Toast.show({
+                  type: "success",
+                  text1: "Records update",
+                  text2: "🎉 everything is up to date !",
+                });
+                unsavedRecs();
+              }
             });
           }
           console.log("res after saving records => ", res.data!.saveRecords);
+        });
+      } else {
+        console.info("nothing to be updated !");
+        Toast.show({
+          type: "info",
+          text1: "Records update",
+          text2: "🙅‍♂️ everything is up date ! ",
         });
       }
     });
