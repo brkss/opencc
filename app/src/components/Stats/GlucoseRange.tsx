@@ -2,13 +2,7 @@ import React from "react";
 import { View, StyleSheet, Dimensions, Text } from "react-native";
 import { useDatabaseConnection } from "../../utils/database";
 import { useIsFocused } from "@react-navigation/native";
-/*
-const data = {
-  low: "10%",
-  normal: "50%",
-  high: "40%",
-};
-*/
+
 const { width } = Dimensions.get("window");
 
 export const GlucoseRange: React.FC = () => {
@@ -27,9 +21,9 @@ export const GlucoseRange: React.FC = () => {
       normal: "",
     };
     const totalLen = highs + low + normal;
-    data.high = `${(highs * 100) / totalLen}%`;
-    data.normal = `${(normal * 100) / totalLen}%`;
-    data.low = `${(low * 100) / totalLen}%`;
+    data.high = `${Math.floor((highs * 100) / totalLen)}%`;
+    data.normal = `${Math.floor((normal * 100) / totalLen)}%`;
+    data.low = `${Math.floor((low * 100) / totalLen)}%`;
     return data;
   };
 
