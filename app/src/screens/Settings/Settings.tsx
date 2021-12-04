@@ -3,10 +3,23 @@ import { View, StyleSheet, Text } from "react-native";
 import { SettingsElement, BgInsulinTime } from "../../components";
 import { useDatabaseConnection } from "../../utils/database";
 import { useSaveRecordMutation } from "../../generated/graphql";
+import { useIsFocused } from "@react-navigation/native";
 
 export const Settings: React.FC<any> = ({ navigation }) => {
+  const [unsavedRecords, SetUnsavedRecord] = React.useState([]);
   const { recordsRepository } = useDatabaseConnection();
   const [create] = useSaveRecordMutation();
+  const isFocus = useIsFocused();
+
+  React.useEffect(() => {
+    unsavedRecs();
+  }, [isFocus]);
+
+  const unsavedRecs = () => {
+    recordsRepository.unsavedRecords().then((records) => {
+      SetUnsavedRecord(records as any);
+    });
+  };
 
   const getUnsavedRecords = () => {
     recordsRepository.unsavedRecords().then((records) => {
@@ -19,9 +32,6 @@ export const Settings: React.FC<any> = ({ navigation }) => {
         value: Number(record.value),
         created_at: record.created_at,
       }));
-      console.log("-----------------------------------");
-      console.log("records => ", recs);
-      console.log("-----------------------------------");
       if (recs.length > 0) {
         create({
           variables: {
@@ -53,7 +63,9 @@ export const Settings: React.FC<any> = ({ navigation }) => {
         <SettingsElement
           onClick={() => getUnsavedRecords()}
           icon={"💿"}
-          title={"Save !"}
+          title={`Save `}
+          subtitle={`${unsavedRecords.length} records`}
+          hideNav={true}
         />
         <SettingsElement
           onClick={() => navigation.navigate("meal-time")}

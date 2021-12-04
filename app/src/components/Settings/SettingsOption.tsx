@@ -6,9 +6,17 @@ interface Props {
   onClick: () => void;
   icon: string;
   title: string;
+  subtitle?: string;
+  hideNav?: boolean;
 }
 
-export const SettingsElement: React.FC<Props> = ({ onClick, icon, title }) => {
+export const SettingsElement: React.FC<Props> = ({
+  onClick,
+  icon,
+  title,
+  subtitle,
+  hideNav,
+}) => {
   return (
     <TouchableOpacity onPress={() => onClick()} style={styles.container}>
       <View style={styles.iconContainer}>
@@ -16,15 +24,18 @@ export const SettingsElement: React.FC<Props> = ({ onClick, icon, title }) => {
       </View>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>{title}</Text>
+        {subtitle ? <Text>{subtitle}</Text> : null}
       </View>
-      <View style={styles.navContainer}>
-        <MaterialIcons
-          style={{ alignSelf: "flex-end" }}
-          name="keyboard-arrow-right"
-          size={27}
-          color="black"
-        />
-      </View>
+      {!hideNav ? (
+        <View style={styles.navContainer}>
+          <MaterialIcons
+            style={{ alignSelf: "flex-end" }}
+            name="keyboard-arrow-right"
+            size={27}
+            color="black"
+          />
+        </View>
+      ) : null}
     </TouchableOpacity>
   );
 };
