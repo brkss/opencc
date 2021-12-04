@@ -19,20 +19,28 @@ export const Settings: React.FC<any> = ({ navigation }) => {
         value: Number(record.value),
         created_at: record.created_at,
       }));
-      create({
-        variables: {
-          records: recs,
-        },
-      }).then((res) => {
-        // please handle error here! with toasts
-        // before forcing data defenition !
-        if (res.data && res.data.saveRecords) {
-          // map ids to update sqlite
-          const ids = recs.map((record) => record.id);
-          console.log("ids => ", ids);
-        }
-        console.log("res after saving records => ", res.data!.saveRecords);
-      });
+      console.log("-----------------------------------");
+      console.log("records => ", recs);
+      console.log("-----------------------------------");
+      if (recs.length > 0) {
+        create({
+          variables: {
+            records: recs,
+          },
+        }).then((res) => {
+          // please handle error here! with toasts
+          // before forcing data defenition !
+          if (res.data && res.data.saveRecords) {
+            // map ids to update sqlite
+            const ids = recs.map((record) => record.id);
+            //console.log("ids => ", ids);
+            recordsRepository.markRecords(ids).then((res) => {
+              console.log("res marking records as syncd => ", res);
+            });
+          }
+          console.log("res after saving records => ", res.data!.saveRecords);
+        });
+      }
     });
   };
 
