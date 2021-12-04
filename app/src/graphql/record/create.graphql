@@ -1,0 +1,14 @@
+
+
+type CreateRecordInput {
+  id: String,
+  label: String,
+  icon: String,
+  unit: String,
+  value: Float,
+  created_at: Date
+}
+
+mutation SaveRecord($records: [CreateRecordInput!]!){
+  saveRecords(records: $records)
+}

@@ -58,6 +58,13 @@ export type PingQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type PingQuery = { __typename?: 'Query', ping: string };
 
+export type SaveRecordMutationVariables = Exact<{
+  records: Array<CreateRecordInput> | CreateRecordInput;
+}>;
+
+
+export type SaveRecordMutation = { __typename?: 'Mutation', saveRecords: boolean };
+
 
 export const PingDocument = gql`
     query Ping {
@@ -91,3 +98,34 @@ export function usePingLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PingQ
 export type PingQueryHookResult = ReturnType<typeof usePingQuery>;
 export type PingLazyQueryHookResult = ReturnType<typeof usePingLazyQuery>;
 export type PingQueryResult = Apollo.QueryResult<PingQuery, PingQueryVariables>;
+export const SaveRecordDocument = gql`
+    mutation SaveRecord($records: [CreateRecordInput!]!) {
+  saveRecords(records: $records)
+}
+    `;
+export type SaveRecordMutationFn = Apollo.MutationFunction<SaveRecordMutation, SaveRecordMutationVariables>;
+
+/**
+ * __useSaveRecordMutation__
+ *
+ * To run a mutation, you first call `useSaveRecordMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSaveRecordMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [saveRecordMutation, { data, loading, error }] = useSaveRecordMutation({
+ *   variables: {
+ *      records: // value for 'records'
+ *   },
+ * });
+ */
+export function useSaveRecordMutation(baseOptions?: Apollo.MutationHookOptions<SaveRecordMutation, SaveRecordMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<SaveRecordMutation, SaveRecordMutationVariables>(SaveRecordDocument, options);
+      }
+export type SaveRecordMutationHookResult = ReturnType<typeof useSaveRecordMutation>;
+export type SaveRecordMutationResult = Apollo.MutationResult<SaveRecordMutation>;
+export type SaveRecordMutationOptions = Apollo.BaseMutationOptions<SaveRecordMutation, SaveRecordMutationVariables>;

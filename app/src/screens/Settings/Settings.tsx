@@ -2,13 +2,37 @@ import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { SettingsElement, BgInsulinTime } from "../../components";
 import { useDatabaseConnection } from "../../utils/database";
+import { useSaveRecordMutation } from "../../generated/graphql";
 
 export const Settings: React.FC<any> = ({ navigation }) => {
   const { recordsRepository } = useDatabaseConnection();
+  const [create] = useSaveRecordMutation();
 
   const getUnsavedRecords = () => {
     recordsRepository.unsavedRecords().then((records) => {
-      console.log("unsaved records => ", records);
+      // map records
+      const recs = records.map((record) => ({
+        id: record.id,
+        label: record.label,
+        icon: record.icon,
+        unit: record.unit,
+        value: Number(record.value),
+        created_at: record.created_at,
+      }));
+      create({
+        variables: {
+          records: recs,
+        },
+      }).then((res) => {
+        // please handle error here! with toasts
+        // before forcing data defenition !
+        if (res.data && res.data.saveRecords) {
+          // map ids to update sqlite
+          const ids = recs.map((record) => record.id);
+          console.log("ids => ", ids);
+        }
+        console.log("res after saving records => ", res.data!.saveRecords);
+      });
     });
   };
 
@@ -21,7 +45,7 @@ export const Settings: React.FC<any> = ({ navigation }) => {
         <SettingsElement
           onClick={() => getUnsavedRecords()}
           icon={"💿"}
-          title={"Sync your data"}
+          title={"Save !"}
         />
         <SettingsElement
           onClick={() => navigation.navigate("meal-time")}
