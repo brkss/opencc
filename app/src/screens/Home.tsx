@@ -11,6 +11,7 @@ import {
 import { useIsFocused } from "@react-navigation/native";
 import { useDatabaseConnection } from "../utils/database";
 import moment from "moment";
+import { usePingQuery } from "../generated/graphql";
 
 export const Home: React.FC<any> = ({ navigation }) => {
   const isFocus = useIsFocused();
@@ -21,6 +22,7 @@ export const Home: React.FC<any> = ({ navigation }) => {
     time: 0,
     mealTitle: "",
   });
+  const { data, loading } = usePingQuery();
 
   React.useEffect(() => {
     getNextMeal();
@@ -88,7 +90,6 @@ export const Home: React.FC<any> = ({ navigation }) => {
       SetRecords((curr) => curr.filter((rec) => rec.id != id));
     }
   };
-  if (nextMeal.time == 0) return <Text>Time still 0</Text>;
   return (
     <View style={styles.container}>
       <TopNavigation navigation={navigation} />
