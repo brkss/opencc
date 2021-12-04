@@ -16,51 +16,12 @@ export const Timer: React.FC<Props> = ({ time, title }) => {
 
   React.useEffect(() => {
     let interval = setInterval(() => {
-      console.log("TIMER COUNT : ", time);
-      //time <= 1 && clearInterval(interval);
       formatTime(time - new Date().getTime());
     }, 1000);
 
     return () => clearInterval(interval);
   }, []);
 
-  /*
-  const getNextMeal = () => {
-    timeRepository.meals().then((meals) => {
-      // calculate minutes in day !
-      const dm = (m: any) => {
-        return m.minutes() + m.hours() * 60;
-      };
-      let exp = {
-        dm: null as any,
-        time: null as any,
-        meal: null as any,
-      };
-      for (let meal of meals) {
-        const time = moment(meal.time);
-        if (dm(time) > dm(moment())) {
-          if (!exp.dm || exp.dm > dm(time))
-            exp = {
-              dm: dm(time),
-              time: meal.time,
-              meal: meal.name,
-            };
-        }
-      }
-      exp = {
-        dm: exp.dm,
-        time: `${new Date().toISOString().split("T")[0]}T${
-          exp.time.toISOString().split("T")[1]
-        }`,
-        meal: exp.meal,
-      };
-
-      console.log("EXPIRE TIEM : ", new Date(exp.time).getTime());
-      setTimer(new Date(exp.time).getTime());
-      setMealName(exp.meal);
-    });
-  };
-   */
   const stringfyTime = (time: number) => {
     if (time == 0) return "00";
     if (time < 10) return `0${time}`;

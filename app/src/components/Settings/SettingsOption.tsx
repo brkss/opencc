@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     paddingVertical: 17,
     backgroundColor: "#e3e4e6",
     borderRadius: 7,
+    marginVertical: 7,
   },
   // icon
   iconContainer: {},

@@ -50,6 +50,12 @@ export class RecordRepository {
     }
   }
 
+  // get records with syncd = false !
+  public async unsavedRecords(): Promise<Record[]> {
+    const records = await this._ormRepository.find({ where: { syncd: false } });
+    return records;
+  }
+
   public async deleteRecord(id: string): Promise<boolean> {
     try {
       await this._ormRepository.delete(id);
