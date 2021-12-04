@@ -77,4 +77,14 @@ export class RecordRepository {
       return false;
     }
   }
+
+  // get glucose records
+  public async glucoseRecords(): Promise<Record[]> {
+    const glucose = await this._ormRepository
+      .createQueryBuilder("records")
+      .where("records.label like :label", { label: "Glucose%" })
+      .getMany();
+
+    return glucose;
+  }
 }
