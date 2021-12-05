@@ -17,7 +17,7 @@ export class RecordRepository {
   }
 
   public async getAll(): Promise<Record[]> {
-    return await this._ormRepository.find();
+    return await this._ormRepository.find({ take: 30 });
   }
 
   public async createRecord({
