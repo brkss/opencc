@@ -4,6 +4,11 @@ import { CreateRecordInput } from "../utils/inputs";
 
 @Resolver()
 export class RecordResolver {
+  @Query(() => String)
+  ping() {
+    return "pong!";
+  }
+
   @Query(() => [Record])
   async records(): Promise<Record[]> {
     const records = await Record.find();

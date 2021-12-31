@@ -17,6 +17,9 @@ const type_graphql_1 = require("type-graphql");
 const entity_1 = require("../entity");
 const inputs_1 = require("../utils/inputs");
 let RecordResolver = class RecordResolver {
+    ping() {
+        return "pong!";
+    }
     async records() {
         const records = await entity_1.Record.find();
         return records;
@@ -43,6 +46,12 @@ let RecordResolver = class RecordResolver {
         }
     }
 };
+__decorate([
+    (0, type_graphql_1.Query)(() => String),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], RecordResolver.prototype, "ping", null);
 __decorate([
     (0, type_graphql_1.Query)(() => [entity_1.Record]),
     __metadata("design:type", Function),
