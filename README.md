@@ -42,6 +42,11 @@ Use expo to test / build Opencc
 cd opencc/app
 ```
 
+
+```bash
+yarn
+```
+
 ```bash
 expo run:ios
 ```
