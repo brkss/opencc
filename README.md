@@ -4,8 +4,13 @@ Help you manage Bolus/Basal insulin doses and keep tracking your daily data
 
 ## Images
 
-![i1](images/1.png "i1") ![i2](images/2.png "i2")
-![i3](images/3.png "i3") ![i4](images/4.png "i4")
+|                          |                           |                              | 
+| ---                      | ---                       | ---                          |
+| ![i1](images/1.png "i1") | ![i2](images/2.png "i2")  | ![i3](images/3.png "i3") | 
+
+
+ 
+ 
 
 
 ## Server
@@ -35,6 +40,11 @@ Use expo to test / build Opencc
 
 ```bash
 cd opencc/app
+```
+
+
+```bash
+yarn
 ```
 
 ```bash
