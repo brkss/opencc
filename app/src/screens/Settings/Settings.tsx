@@ -13,13 +13,28 @@ export const Settings: React.FC<any> = ({ navigation }) => {
   const isFocus = useIsFocused();
 
   React.useEffect(() => {
-    unsavedRecs();
+    (async () => {
+      await unsavedRecs();
+    })();
+    return () => {
+      SetUnsavedRecord([]);
+    };
   }, [isFocus]);
 
-  const unsavedRecs = () => {
-    recordsRepository.unsavedRecords().then((records) => {
-      SetUnsavedRecord(records as any);
-    });
+  const unsavedRecs = async () => {
+    const r = await recordsRepository.unsavedRecords();
+
+    SetUnsavedRecord(r as any);
+    /*
+    recordsRepository
+      .unsavedRecords()
+      .then((records) => {
+        SetUnsavedRecord(records as any);
+      })
+      .catch((e) => {
+        console.log("Something went wrong fetching unsaved records  => ", e);
+      });
+    */
   };
 
   const getUnsavedRecords = () => {
