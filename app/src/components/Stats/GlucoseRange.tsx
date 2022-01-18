@@ -7,7 +7,12 @@ const { width } = Dimensions.get("window");
 
 export const GlucoseRange: React.FC = () => {
   const { recordsRepository } = useDatabaseConnection();
-  const [data, SetData] = React.useState<any>({});
+  const [data, SetData] = React.useState<any>({
+    normal: "0%",
+    low: "0%",
+    high: "0%",
+  });
+  const [noRecordFlag, SetNoRecordFlag] = React.useState(false);
   const isFocus = useIsFocused();
 
   React.useEffect(() => {
@@ -29,6 +34,10 @@ export const GlucoseRange: React.FC = () => {
 
   const getGlucoseData = () => {
     recordsRepository.glucoseRecords().then((records) => {
+      if (records.length == 0) {
+        SetNoRecordFlag(true);
+        return;
+      }
       console.log("Glucose records ! = ", records);
       // filter data !
       const highs = records.filter((rec) => {
@@ -51,6 +60,11 @@ export const GlucoseRange: React.FC = () => {
     <View style={styles.container}>
       <Text style={styles.label}>{data.normal} in Range</Text>
       <View style={styles.bar}>
+        <View
+          style={[styles.noRecord, { width: noRecordFlag ? "100%" : "0%" }]}
+        >
+          <Text style={styles.num}>no data</Text>
+        </View>
         <View style={[styles.upRange, { width: data.high }]}>
           <Text style={styles.num}>{data.high}</Text>
         </View>
@@ -104,6 +118,12 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 10,
     width: "10%",
     backgroundColor: "#e18f9d",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  noRecord: {
+    borderRadius: 10,
+    backgroundColor: "#ededed",
     justifyContent: "center",
     alignItems: "center",
   },

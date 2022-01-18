@@ -13,12 +13,10 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.berkasse.app"
+      "bundleIdentifier": "me.brkss.opencc"
     },
     "android": {
       "adaptiveIcon": {
